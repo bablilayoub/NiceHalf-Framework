@@ -22,5 +22,8 @@
         "filp/whoops": "^2.14",
         "jenssegers/blade": "^1.4",
         "rakit/validation": "^1.4"
-    }
+    },
+    "files": [
+        "system/Helpers/helper.php"
+    ]
 }
