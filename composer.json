@@ -1,0 +1,25 @@
+{
+    "name": "nicehalf/nicehalf-framework",
+    "description": "NiceHalf Framework is an open source PHP Framework ready for production.",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "NicehalfCore\\": "./",
+            "NicehalfCore\\System\\": "system/",
+            "NicehalfCore\\App\\": "application/"
+        }
+    },
+    "authors": [
+        {
+            "name": "bablilayoub",
+            "email": "ayoubbablil@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.4.0",
+        "filp/whoops": "^2.14",
+        "jenssegers/blade": "^1.4"
+    }
+}
