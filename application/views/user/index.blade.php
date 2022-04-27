@@ -12,7 +12,7 @@
         <p>{{ $user->username }}</p>
     @endforeach
 
-    {!! \NicehalfCore\System\Database\Database::links($users['current_page'], $users['pages']) !!}
+    {!! paginate($users['current_page'], $users['pages']) !!}
 </body>
 
 </html>
