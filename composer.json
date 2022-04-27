@@ -3,6 +3,7 @@
     "description": "NiceHalf Framework is an open source PHP Framework ready for production.",
     "type": "project",
     "license": "MIT",
+    "version": "1.0.1",
     "autoload": {
         "psr-4": {
             "NicehalfCore\\": "./",
