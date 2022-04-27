@@ -12,7 +12,7 @@
         <p><?php echo e($user->username); ?></p>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-    <?php echo \NicehalfCore\System\Database::links($users['current_page'], $users['pages']); ?>
+    <?php echo \NicehalfCore\System\Database\Database::links($users['current_page'], $users['pages']); ?>
 
 </body>
 
