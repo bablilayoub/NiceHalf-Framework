@@ -15,8 +15,8 @@ namespace NicehalfCore\System\Views;
 
 // USE CLASSES AND LIBRARIES
 use Jenssegers\Blade\Blade;
-use NicehalfCore\System\Session;
 use NicehalfCore\System\Extra\File;
+use NicehalfCore\System\Sessions\Session;
 
 // View Class
 class View

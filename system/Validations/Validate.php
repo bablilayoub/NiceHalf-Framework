@@ -15,10 +15,10 @@ namespace NicehalfCore\System\Validations;
 
 // USE LIBRARIES AND CLASSES
 use Rakit\Validation\Validator;
-use NicehalfCore\System\Session;
 use NicehalfCore\System\Extra\Url;
 use NicehalfCore\System\Http\Request;
-use NicehalfCore\System\Rules\UniqueRule;
+use NicehalfCore\System\Sessions\Session;
+use NicehalfCore\System\Validations\Rules\UniqueRule;
 
 // Vlidate Class
 class Validate

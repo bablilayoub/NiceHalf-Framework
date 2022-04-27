@@ -3,7 +3,7 @@
 namespace NicehalfCore\System\Validations\Rules;
 
 use Rakit\Validation\Rule;
-use NicehalfCore\System\Database;
+use NicehalfCore\System\Database\Database;
 
 class UniqueRule extends Rule
 {
