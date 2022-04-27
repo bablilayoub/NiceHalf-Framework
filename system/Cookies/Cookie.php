@@ -29,16 +29,20 @@ class Cookie
      *
      * @param string $key
      * @param string $value
-     *
+     * @param int $expire
      * @return string $value
      */
-    public static function set($key, $value)
+    public static function set($key, $value, $expire = null)
     {
-        $expired = time() + (1 * 365 * 24 * 60 * 60);
-        setcookie($key, $value, $expired, '/', '', false, true);
+        if ($expire == null) {
+            $expire = time() + (60 * 60 * 24 * 30);
+        }
+
+        setcookie($key, $value, $expire, '/');
 
         return $value;
     }
+
 
     /**
      * Check that cookie has the key
