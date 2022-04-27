@@ -8,7 +8,7 @@ Route::get('/', function () {
     return 'Hello World';
 });
 
-Route::get('users/{id}', 'UserController@show');
+Route::get('users', 'UserController@index');
 
 Route::prefix('admin', function () {
     Route::get('dashboard', 'UserController@index');
