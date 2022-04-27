@@ -11,6 +11,8 @@
     @foreach ($users['data'] as $user)
         <p>{{ $user->username }}</p>
     @endforeach
+
+    {!! \NicehalfCore\System\Database::links($users['current_page'], $users['pages']) !!}
 </body>
 
 </html>

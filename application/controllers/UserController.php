@@ -2,14 +2,14 @@
 
 namespace NicehalfCore\App\Controllers;
 
-use NicehalfCore\System\Database;
+use NicehalfCore\App\Models\User;
 use NicehalfCore\System\View;
 
 class UserController
 {
     public function index()
-    {   
-        $users = Database::table('users')->paginate(5);
+    {
+        $users = User::paginate(1);
         return View::render('user.index', ['users' => $users]);
     }
 }

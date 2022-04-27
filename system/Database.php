@@ -20,9 +20,9 @@ use PDOException;
 use NicehalfCore\System\File;
 use NicehalfCore\System\Request;
 
-
 // Database Class
-class Database {
+class Database
+{
     /**
      * Database instance
      */
@@ -134,18 +134,20 @@ class Database {
     /**
      * Database constructor
      */
-    private function __construct($table) {
+    private function __construct($table)
+    {
         static::$table = $table;
     }
 
     /**
      * Connect to database
      */
-    private static function connect() {
-        if (! static::$connection) {
+    private static function connect()
+    {
+        if (!static::$connection) {
             $database_data = File::require_file('/application/config/database.php');
             extract($database_data);
-            $dsn = 'mysql:dbname='.$database.';host='.$host.'';
+            $dsn = 'mysql:dbname=' . $database . ';host=' . $host . '';
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
@@ -154,8 +156,7 @@ class Database {
             ];
             try {
                 static::$connection = new PDO($dsn, $username, $password, $options);
-            }
-            catch (PDOException $e) {
+            } catch (PDOException $e) {
                 throw new Exception($e->getMessage());
             }
         }
@@ -164,10 +165,11 @@ class Database {
     /**
      * Get the instance of the class
      */
-    private static function instance() {
+    private static function instance()
+    {
         static::connect();
         $table = static::$table;
-        if (! self::$instance) {
+        if (!self::$instance) {
             self::$instance = new Database($table);
         }
 
@@ -180,10 +182,11 @@ class Database {
      * @param string $query
      * @return string
      */
-    public static function query($query = null) {
+    public static function query($query = null)
+    {
         static::instance();
         if ($query == null) {
-            if (! static::$table) {
+            if (!static::$table) {
                 throw new Exception("Unknown table");
             }
             $query = "SELECT ";
@@ -209,7 +212,8 @@ class Database {
      *
      * @return object $instance
      */
-    public static function select() {
+    public static function select()
+    {
         $select = func_get_args();
         $select = implode(', ', $select);
 
@@ -224,7 +228,8 @@ class Database {
      *
      * @return object $instance
      */
-    public static function table($table) {
+    public static function table($table)
+    {
         static::$table = $table;
 
         return static::instance();
@@ -241,7 +246,8 @@ class Database {
      *
      * @return object $type
      */
-    public static function join($table, $first, $operator, $second, $type = "INNER") {
+    public static function join($table, $first, $operator, $second, $type = "INNER")
+    {
         static::$join .= " " . $type . " JOIN " . $table . " ON " . $first . $operator . $second . " ";
 
         return static::instance();
@@ -257,7 +263,8 @@ class Database {
      *
      * @return object $type
      */
-    public static function rightJoin($table, $first, $operator, $second) {
+    public static function rightJoin($table, $first, $operator, $second)
+    {
         static::join($table, $first, $operator, $second, "RIGHT");
 
         return static::instance();
@@ -273,7 +280,8 @@ class Database {
      *
      * @return object $type
      */
-    public static function leftJoin($table, $first, $operator, $second) {
+    public static function leftJoin($table, $first, $operator, $second)
+    {
         static::join($table, $first, $operator, $second, "RIGHT");
 
         return static::instance();
@@ -289,9 +297,10 @@ class Database {
      *
      * @return object $instance
      */
-    public static function where($column, $operator, $value, $type = null) {
+    public static function where($column, $operator, $value, $type = null)
+    {
         $where = '`' . $column . '`' . $operator . ' ? ';
-        if (! static::$where) {
+        if (!static::$where) {
             $statement = " WHERE " . $where;
         } else {
             if ($type == null) {
@@ -316,10 +325,23 @@ class Database {
      *
      * @return object $value
      */
-    public static function orWhere($column, $operator, $value) {
+    public static function orWhere($column, $operator, $value)
+    {
         static::where($column, $operator, $value, "OR");
 
         return static::instance();
+    }
+
+        /**
+     * Filter string
+     * @param string $value
+     * @return string
+     */
+
+    public static function filter(string $string): string
+    {
+        $str = preg_replace('/\x00|<[^>]*>?/', '', $string);
+        return str_replace(["'", '"'], ['&#39;', '&#34;'], $str);
     }
 
     /**
@@ -327,7 +349,8 @@ class Database {
      *
      * @return object $instance
      */
-    public static function groupBy() {
+    public static function groupBy()
+    {
         $group_by = func_get_args();
         $group_by = "GROUP BY " . implode(', ', $group_by) . " ";
 
@@ -345,9 +368,10 @@ class Database {
      *
      * @return object $instance
      */
-    public static function having($column, $operator, $value) {
+    public static function having($column, $operator, $value)
+    {
         $having = '`' . $column . '`' . $operator . ' ? ';
-        if (! static::$where) {
+        if (!static::$where) {
             $statement = " HAVING " . $having;
         } else {
             $statement = " AND " . $having;
@@ -367,7 +391,8 @@ class Database {
      *
      * @return object $instance
      */
-    public static function orderBy($column, $type = null) {
+    public static function orderBy($column, $type = null)
+    {
         $sep = static::$order_by ? " , " : " ORDER BY ";
         $type = strtoupper($type);
         $type = ($type != null && in_array($type, ['ASC', 'DESC'])) ? $type : "ASC";
@@ -385,7 +410,8 @@ class Database {
      *
      * @return object $instance
      */
-    public static function limit($limit) {
+    public static function limit($limit)
+    {
         static::$limit = "LIMIT " . $limit . " ";
 
         return static::instance();
@@ -398,7 +424,8 @@ class Database {
      *
      * @return object $instance
      */
-    public static function offset($offset) {
+    public static function offset($offset)
+    {
         static::$offset = "OFFSET " . $offset . " ";
 
         return static::instance();
@@ -409,7 +436,8 @@ class Database {
      *
      * @return object $data
      */
-    private static function fetchExecute() {
+    private static function fetchExecute()
+    {
         static::query(static::$query);
         $query = trim(static::$query, ' ');
         $data = static::$connection->prepare($query);
@@ -425,7 +453,8 @@ class Database {
      *
      * @return object $result
      */
-    public static function get() {
+    public static function get()
+    {
         $data = static::fetchExecute();
         $result = $data->fetchAll();
 
@@ -437,7 +466,8 @@ class Database {
      *
      * @return object $result
      */
-    public static function first() {
+    public static function first()
+    {
         $data = static::fetchExecute();
         $result = $data->fetch();
 
@@ -453,15 +483,16 @@ class Database {
      *
      * @return void
      */
-    private static function execute(Array $data, $query, $where = null) {
+    private static function execute(array $data, $query, $where = null)
+    {
         static::instance();
-        if (! static::$table) {
+        if (!static::$table) {
             throw new Exception("Unknow table");
         }
 
-        foreach($data as $key => $value) {
+        foreach ($data as $key => $value) {
             static::$setter .= '`' . $key . '` = ?, ';
-            static::$binding[] = filter_var($value, FILTER_SANITIZE_STRING);
+            static::$binding[] = static::filter($value);
         }
         static::$setter = trim(static::$setter, ', ');
 
@@ -483,7 +514,8 @@ class Database {
      *
      * @return object
      */
-    public static function insert($data) {
+    public static function insert($data)
+    {
         $table = static::$table;
         $query = "INSERT INTO " . $table . " SET ";
         static::execute($data, $query);
@@ -501,7 +533,8 @@ class Database {
      *
      * @return bool
      */
-    public static function update($data) {
+    public static function update($data)
+    {
         $query = "UPDATE " . static::$table . " SET ";
         static::execute($data, $query, true);
 
@@ -513,7 +546,8 @@ class Database {
      *
      * @return bool
      */
-    public static function delete() {
+    public static function delete()
+    {
         $query = "DELETE FROM " . static::$table . " ";
         static::execute([], $query, true);
 
@@ -525,7 +559,8 @@ class Database {
      *
      * @return mixed $result
      */
-    public static function paginate($items_per_page = 15) {
+    public static function paginate($items_per_page = 15)
+    {
         static::query(static::$query);
         $query = trim(static::$query, ' ');
         $data = static::$connection->prepare($query);
@@ -533,7 +568,7 @@ class Database {
         $pages = ceil($data->rowCount() / $items_per_page);
 
         $page = Request::get('page');
-        $current_page = (! is_numeric($page) || Request::get('page') < 1) ? "1" : $page;
+        $current_page = (!is_numeric($page) || Request::get('page') < 1) ? "1" : $page;
         $offset = ($current_page - 1) * $items_per_page;
         static::limit($items_per_page);
         static::offset($offset);
@@ -554,7 +589,8 @@ class Database {
      * @param int $pages
      * @return string $result
      */
-    public static function links($current_page, $pages) {
+    public static function links($current_page, $pages)
+    {
         $links = '';
         $from = $current_page - 2;
         $to = $current_page + 2;
@@ -567,8 +603,12 @@ class Database {
             $from = ($from > 2) ? $from - $diff : 2;
             $to = $pages - 1;
         }
-        if ($from < 2) {$from = 1;}
-        if ($to >= $pages) {$to = ($pages - 1);}
+        if ($from < 2) {
+            $from = 1;
+        }
+        if ($to >= $pages) {
+            $to = ($pages - 1);
+        }
 
         if ($pages > 1) {
             $links .= "<ul class='pagination'>";
@@ -577,18 +617,18 @@ class Database {
             $full_link = preg_replace('/\&page=(.*)/', '', $full_link);
 
             $current_page_active = $current_page == 1 ? 'active' : '';
-            $href = strpos($full_link, '?') ? ($full_link.'&page=1') : ($full_link.'?page=1');
+            $href = strpos($full_link, '?') ? ($full_link . '&page=1') : ($full_link . '?page=1');
             $links .= "<li class='link' $current_page_active><a href='$href'>First</a></li>";
 
-            for($i = $from; $i<= $to; $i++) {
+            for ($i = $from; $i <= $to; $i++) {
                 $current_page_active = $current_page == $i ? 'active' : '';
-                $href = strpos($full_link, '?') ? ($full_link.'&page='.$i) : ($full_link.'?page='.$i);
+                $href = strpos($full_link, '?') ? ($full_link . '&page=' . $i) : ($full_link . '?page=' . $i);
                 $links .= "<li class='link' $current_page_active><a href='$href'>$i</a></li>";
             }
 
             if ($pages > 1) {
                 $current_page_active = $current_page == $pages ? 'active' : '';
-                $href = strpos($full_link, '?') ? ($full_link.'&page='.$pages) : ($full_link.'?page='.$pages);
+                $href = strpos($full_link, '?') ? ($full_link . '&page=' . $pages) : ($full_link . '?page=' . $pages);
                 $links .= "<li class='link' $current_page_active><a href='$href'>Last</a></li>";
             }
 
@@ -601,7 +641,8 @@ class Database {
      *
      * @return void
      */
-    private static function clear() {
+    private static function clear()
+    {
         static::$select = '';
         static::$join = '';
         static::$where = '';
