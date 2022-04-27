@@ -333,7 +333,7 @@ class Database
         return static::instance();
     }
 
-        /**
+    /**
      * Filter string
      * @param string $value
      * @return string
@@ -553,6 +553,20 @@ class Database
         static::execute([], $query, true);
 
         return true;
+    }
+
+    /**
+     * Count records
+     * @return int
+     */
+    public static function count()
+    {
+        $query = "SELECT COUNT(*) AS count FROM " . static::$table . " ";
+        static::execute([], $query, true);
+        $data = static::fetchExecute();
+        $result = $data->fetch();
+
+        return $result['count'];
     }
 
     /**
