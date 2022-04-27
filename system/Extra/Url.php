@@ -25,6 +25,16 @@ class Url {
     private function __construct() {}
 
     /**
+     * Get the current url
+     * 
+     * @return string
+     */
+
+    public static function getCurrentUrl() {
+        return Server::get('REQUEST_SCHEME') . '://' . Server::get('HTTP_HOST') . Server::get('REQUEST_URI');
+    }
+
+    /**
      * Get path
      *
      * @param string $path

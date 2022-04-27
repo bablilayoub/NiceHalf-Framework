@@ -241,7 +241,7 @@ class Request
     }
 
     /**
-     * Get request all
+     * Get all requests
      *
      * @return array
      */
