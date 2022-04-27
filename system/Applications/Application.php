@@ -11,10 +11,10 @@
  */
 
 // USE CLASSES AND LIBRARIES
-use NicehalfCore\System\Route;
 use NicehalfCore\System\Extra\File;
 use NicehalfCore\System\Http\Request;
 use NicehalfCore\System\Http\Response;
+use NicehalfCore\System\Routers\Route;
 use NicehalfCore\System\Exeptions\Whoops;
 use NicehalfCore\System\Sessions\Session;
 
@@ -30,7 +30,7 @@ class Application
     public static function run()
     {
         // ROOT PATH
-        define('ROOT', realpath(__DIR__ . '/../'));
+        define('ROOT', realpath(__DIR__ . '/../../'));
 
         // DERECTORY SEPARATOR
         define('DS', DIRECTORY_SEPARATOR);

@@ -2,7 +2,7 @@
 
 namespace NicehalfCore\App\Models;
 
-use NicehalfCore\System\Model;
+use NicehalfCore\System\Models\Model;
 
 class User extends Model
 {

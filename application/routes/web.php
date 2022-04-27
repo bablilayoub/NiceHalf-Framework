@@ -1,7 +1,7 @@
 <?php
 
 // USE ROUTER CLASS
-use NicehalfCore\System\Route;
+use NicehalfCore\System\Routers\Route;
 
 // Add routes
 Route::get('/', function () {

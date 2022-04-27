@@ -3,7 +3,7 @@
 namespace NicehalfCore\App\Controllers;
 
 use NicehalfCore\App\Models\User;
-use NicehalfCore\System\View;
+use NicehalfCore\System\Views\View;
 
 class UserController
 {
