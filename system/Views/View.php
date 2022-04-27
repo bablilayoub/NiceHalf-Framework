@@ -11,12 +11,12 @@
  */
 
 // NAMESPACE
-namespace NicehalfCore\System;
+namespace NicehalfCore\System\Views;
 
 // USE CLASSES AND LIBRARIES
 use Jenssegers\Blade\Blade;
-use NicehalfCore\System\File;
 use NicehalfCore\System\Session;
+use NicehalfCore\System\Extra\File;
 
 // View Class
 class View

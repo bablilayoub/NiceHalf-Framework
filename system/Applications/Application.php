@@ -11,12 +11,12 @@
  */
 
 // USE CLASSES AND LIBRARIES
-use NicehalfCore\System\File;
 use NicehalfCore\System\Route;
-use NicehalfCore\System\Whoops;
-use NicehalfCore\System\Request;
-use NicehalfCore\System\Session;
-use NicehalfCore\System\Response;
+use NicehalfCore\System\Extra\File;
+use NicehalfCore\System\Http\Request;
+use NicehalfCore\System\Http\Response;
+use NicehalfCore\System\Exeptions\Whoops;
+use NicehalfCore\System\Sessions\Session;
 
 // Application Class
 class Application

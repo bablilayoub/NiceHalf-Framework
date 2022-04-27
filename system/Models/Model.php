@@ -11,7 +11,10 @@
  */
 
 // NAMESPACE
-namespace NicehalfCore\System;
+namespace NicehalfCore\System\Models;
+
+// USE CLASSES AND LIBRARIES
+use NicehalfCore\System\Database\Database;
 
 // Model Class
 abstract class Model extends Database

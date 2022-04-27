@@ -36,7 +36,7 @@ require __DIR__ . '/../vendor/autoload.php';
 |
 */
 
-require __DIR__ . '/../system/Application.php';
+require __DIR__ . '/../system/Applications/Application.php';
 
 /*
 |--------------------------------------------------------------------------

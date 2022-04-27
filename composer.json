@@ -20,6 +20,7 @@
     "require": {
         "php": ">=7.4.0",
         "filp/whoops": "^2.14",
-        "jenssegers/blade": "^1.4"
+        "jenssegers/blade": "^1.4",
+        "rakit/validation": "^1.4"
     }
 }

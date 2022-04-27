@@ -11,14 +11,15 @@
  */
 
 // NAMESPACE
-namespace NicehalfCore\System;
+namespace NicehalfCore\System\Database;
 
 // USE CLASSES AND LIBRARIES
 use PDO;
 use Exception;
 use PDOException;
-use NicehalfCore\System\File;
-use NicehalfCore\System\Request;
+use NicehalfCore\System\Extra\Url;
+use NicehalfCore\System\Extra\File;
+use NicehalfCore\System\Http\Request;
 
 // Database Class
 class Database

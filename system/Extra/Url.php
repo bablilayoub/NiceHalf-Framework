@@ -11,11 +11,11 @@
  */
 
 // NAMESPACE
-namespace NicehalfCore\System;
+namespace NicehalfCore\System\Extra;
 
 // USE CLASSES AND LIBRARIES
-use NicehalfCore\System\Server;
-use NicehalfCore\System\Request;
+use NicehalfCore\System\Http\Server;
+use NicehalfCore\System\Http\Request;
  
 // Url Class
 class Url {

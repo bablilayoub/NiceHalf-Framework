@@ -11,13 +11,13 @@
  */
 
 // NAMESPACE
-namespace NicehalfCore\System;
+namespace NicehalfCore\System\Cookies;
 
-// Session Class
-class Session
+// Cookie Class
+class Cookie
 {
     /**
-     * Session constructor
+     * Cookie constructor
      *
      */
     private function __construct()
@@ -25,20 +25,7 @@ class Session
     }
 
     /**
-     * Session start
-     *
-     * @return void
-     */
-    public static function start()
-    {
-        if (!session_id()) {
-            ini_set('session.use_only_cookies', 1);
-            session_start();
-        }
-    }
-
-    /**
-     * Set new session
+     * Set new cookie
      *
      * @param string $key
      * @param string $value
@@ -47,13 +34,14 @@ class Session
      */
     public static function set($key, $value)
     {
-        $_SESSION[$key] = $value;
+        $expired = time() + (1 * 365 * 24 * 60 * 60);
+        setcookie($key, $value, $expired, '/', '', false, true);
 
         return $value;
     }
 
     /**
-     * Check that session has the key
+     * Check that cookie has the key
      *
      * @param string $key
      *
@@ -61,11 +49,11 @@ class Session
      */
     public static function has($key)
     {
-        return isset($_SESSION[$key]);
+        return isset($_COOKIE[$key]);
     }
 
     /**
-     * Get session by the given key
+     * Get cookie by the given key
      *
      * @param string $key
      *
@@ -73,32 +61,33 @@ class Session
      */
     public static function get($key)
     {
-        return static::has($key) ? $_SESSION[$key] : null;
+        return static::has($key) ? $_COOKIE[$key] : null;
     }
 
     /**
-     * Delete session by the given key
+     * Delete cookie by the given key
      *
      * @param string $key
      * @return void
      */
     public static function delete($key)
     {
-        unset($_SESSION[$key]);
+        unset($_COOKIE[$key]);
+        setcookie($key, null, '-1', '/');
     }
 
     /**
-     * Return all sessions
+     * Return all cookies
      *
      * @return array
      */
     public static function all()
     {
-        return $_SESSION;
+        return $_COOKIE;
     }
 
     /**
-     * Destroy the session
+     * Destroy the cookie
      *
      * return void
      */
@@ -107,21 +96,5 @@ class Session
         foreach (static::all() as $key => $value) {
             static::delete($key);
         }
-    }
-
-    /**
-     * Get flash session
-     *
-     * @params string $key
-     * @return string $value
-     */
-    public static function flash($key)
-    {
-        $value = null;
-        if (static::has($key)) {
-            $value = static::get($key);
-            static::delete($key);
-        }
-        return $value;
     }
 }

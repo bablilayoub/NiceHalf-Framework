@@ -11,7 +11,7 @@
  */
 
 // NAMESPACE
-namespace NicehalfCore\System;
+namespace NicehalfCore\System\Extra;
 
 // File Class
 class File

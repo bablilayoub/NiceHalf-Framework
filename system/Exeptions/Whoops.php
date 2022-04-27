@@ -11,7 +11,7 @@
  */
 
 // NAMESPACE
-namespace NicehalfCore\System; 
+namespace NicehalfCore\System\Exeptions;
 
 // USE CLASSES AND LIBRARIES
 use Whoops\Run;
