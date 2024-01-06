@@ -6,7 +6,7 @@ class User
 {
     public static function handle()
     {
-        if(1 !== 1) {
+        if (!isset($_SESSION['user'])) {
             die('You are not allowed to access this page.');
         }
     }

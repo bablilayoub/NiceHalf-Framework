@@ -50,6 +50,10 @@ class Application
         // Handle the route
         $data = Route::handle();
 
+        // Check if the data is false
+        if (!$data)
+            return false;
+
         // Output the response
         Response::output($data);
     }

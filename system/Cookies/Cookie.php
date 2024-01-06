@@ -101,4 +101,14 @@ class Cookie
             static::delete($key);
         }
     }
+
+    /**
+     * Check that cookie is empty
+     *
+     * @return bool
+     */
+    public static function isEmpty()
+    {
+        return empty($_COOKIE);
+    }
 }

@@ -91,4 +91,46 @@ class Response
     {
         header($header . ': ' . $value);
     }
+
+    /**
+     * Set response content type
+     * @param string $type
+     */
+    public static function contentType($type)
+    {
+        static::header('Content-Type', $type);
+    }
+
+    /**
+     * Set response content type to json
+     */
+    public static function jsonType()
+    {
+        static::contentType('application/json');
+    }
+
+    /**
+     * Set response content type to html
+     */
+    public static function htmlType()
+    {
+        static::contentType('text/html');
+    }
+
+    /**
+     * Set response content type to plain
+     */
+    public static function plainType()
+    {
+        static::contentType('text/plain');
+    }
+
+    /**
+     * Set response content type to xml
+     */
+    public static function xmlType()
+    {
+        static::contentType('text/xml');
+    }
 }
+

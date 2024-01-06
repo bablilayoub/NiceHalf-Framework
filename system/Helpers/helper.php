@@ -20,6 +20,8 @@
 if (!function_exists('view')) {
     function view($path, $data = [])
     {
+        if (!$path)
+            return false;
         return NicehalfCore\System\Views\View::render($path, $data);
     }
 }
@@ -47,6 +49,8 @@ if (!function_exists('request')) {
 if (!function_exists('redirect')) {
     function redirect($path)
     {
+        if (!$path)
+            return false;
         return NicehalfCore\System\Extra\Url::redirect($path);
     }
 }
@@ -147,6 +151,8 @@ if (!function_exists('flash')) {
 if (!function_exists('paginate')) {
     function paginate($current_page, $pages)
     {
+        if (!$current_page || !$pages)
+            return false;
         return NicehalfCore\System\Database\Database::links($current_page, $pages);
     }
 }
@@ -162,6 +168,8 @@ if (!function_exists('paginate')) {
 if (!function_exists('auth')) {
     function auth($table)
     {
+        if (!$table)
+            return false;
         $auth = NicehalfCore\System\Sessions\Session::get($table) ?: NicehalfCore\System\Cookies\Cookie::get($table);
         return \NicehalfCore\System\Database\Database::table($table)->where('id', '=', $auth)->first();
     }

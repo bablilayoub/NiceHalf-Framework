@@ -112,4 +112,63 @@ class File
             }
         }
     }
+
+    /**
+     * Include directory
+     *
+     * @param string $path
+     * @return mixed
+     */
+    public static function include_directory($path)
+    {
+        $files = array_diff(scandir(static::path($path)), ['.', '..']);
+        foreach ($files as $file) {
+            $file_path = $path . static::ds() . $file;
+            if (static::exist($file_path)) {
+                static::include_file($file_path);
+            }
+        }
+    }
+
+    /**
+     * Require all files
+     *
+     * @param string $path
+     * @return mixed
+     */
+    public static function require_all($path)
+    {
+        $files = array_diff(scandir(static::path($path)), ['.', '..']);
+        foreach ($files as $file) {
+            $file_path = $path . static::ds() . $file;
+            if (static::exist($file_path)) {
+                if (is_dir(static::path($file_path))) {
+                    static::require_directory($file_path);
+                } else {
+                    static::require_file($file_path);
+                }
+            }
+        }
+    }
+
+    /**
+     * Include all files
+     *
+     * @param string $path
+     * @return mixed
+     */
+    public static function include_all($path)
+    {
+        $files = array_diff(scandir(static::path($path)), ['.', '..']);
+        foreach ($files as $file) {
+            $file_path = $path . static::ds() . $file;
+            if (static::exist($file_path)) {
+                if (is_dir(static::path($file_path))) {
+                    static::include_directory($file_path);
+                } else {
+                    static::include_file($file_path);
+                }
+            }
+        }
+    }
 }

@@ -249,4 +249,79 @@ class Request
     {
         return $_REQUEST;
     }
+
+    /**
+     * Get all get requests
+     *
+     * @return array
+     */
+    public static function all_get()
+    {
+        return $_GET;
+    }
+
+    /**
+     * Get all post requests
+     *
+     * @return array
+     */
+    public static function all_post()
+    {
+        return $_POST;
+    }
+
+    /**
+     * Get all files
+     *
+     * @return array
+     */
+    public static function all_files()
+    {
+        return $_FILES;
+    }
+
+    /**
+     * Get file by the given key
+     *
+     * @param string $key
+     * @return array
+     */
+    public static function file($key)
+    {
+        return static::has($_FILES, $key) ? $_FILES[$key] : null;
+    }
+
+    /**
+     * Get all cookies
+     *
+     * @return array
+     */
+    public static function all_cookies()
+    {
+        return $_COOKIE;
+    }
+
+    /**
+     * Check that cookie has the key
+     *
+     * @param string $key
+     *
+     * @return bool
+     */
+    public static function has_cookie($key)
+    {
+        return isset($_COOKIE[$key]);
+    }
+
+    /**
+     * Get cookie by the given key
+     *
+     * @param string $key
+     *
+     * @return mixed
+     */
+    public static function cookie($key)
+    {
+        return static::has_cookie($key) ? $_COOKIE[$key] : null;
+    }
 }

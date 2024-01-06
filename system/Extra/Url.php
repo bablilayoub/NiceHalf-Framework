@@ -62,4 +62,24 @@ class Url {
         header('location: ' . $path);
         exit();
     }
+
+    /**
+     * Redirect to previous page
+     *
+     * @return void
+     */
+    public static function back() {
+        header('location: ' . static::previous());
+        exit();
+    }
+
+    /**
+     * Redirect to home page
+     *
+     * @return void
+     */
+    public static function home() {
+        header('location: ' . Request::baseUrl());
+        exit();
+    }
 }

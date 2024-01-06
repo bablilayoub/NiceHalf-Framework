@@ -64,4 +64,34 @@ class Server
     {
         return pathinfo($path);
     }
+
+    /**
+     * Get path info for request uri
+     *
+     * @return array
+     */
+    public static function request_path_info()
+    {
+        return static::path_info(static::get('REQUEST_URI'));
+    }
+
+    /**
+     * Get path info for script name
+     *
+     * @return array
+     */
+    public static function script_path_info()
+    {
+        return static::path_info(static::get('SCRIPT_NAME'));
+    }
+
+    /**
+     * Get path info for script name
+     *
+     * @return array
+     */
+    public static function base_path_info()
+    {
+        return static::path_info(static::get('SCRIPT_NAME'));
+    }
 }
